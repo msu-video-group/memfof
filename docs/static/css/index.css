@@ -1,0 +1,94 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.publication-awards {
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+  margin: 0.3em;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#error-vs-memory #spring-chart {
+  height: 70vh;
+}
+
+#kitti-results #kitti-chart {
+  height: 70vh;
+}
+
+#sintel-results #sintel-chart {
+  height: 70vh;
+}
+
+#histograms .item {
+  flex: 1 1 50%;
+  padding: 1rem;
+  text-align: center;
+}
+
+@media (orientation: landscape) {
+  #histograms .item {
+    flex: 1 1 25%;
+  }
+}
+
+#memory-efficiency .grid {
+  display: grid;
+  gap: 2rem;
+  justify-content: center;
+  text-align: center;
+  grid-template-columns: 1fr;
+}
+
+@media (orientation: landscape) {
+  #memory-efficiency .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+#memory-efficiency .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#memory-efficiency object {
+  max-width: 100%;
+  height: auto;
+  flex-grow: 1;
+  display: block;
+}

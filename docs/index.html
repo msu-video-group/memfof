@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="MEMFOF is a memory-efficient optical flow method for Full HD video that combines high accuracy with low VRAM usage.">
+  <meta name="keywords" content="optical flow, memory-efficient, high-resolution">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEMFOF: High-Resolution Training for Memory-Efficient Multi-Frame Optical Flow Estimation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="icon" href="static/images/favicon.svg">
+
+  <link rel="stylesheet" href="https://unpkg.com/img-comparison-slider/dist/styles.css">  
+
+  <script defer src="static/js/better-direction-plugin.js"></script>
+  <script defer src="static/js/comparison-slider.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/kitti-chart.js"></script>
+  <script defer src="static/js/sintel-chart.js"></script>
+  <script defer src="static/js/spring-chart.js"></script>
+  
+  <script defer src="https://unpkg.com/img-comparison-slider/dist/index.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+
+<body>
+
+  <section class="hero" id="authors">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">High-Resolution Training for Memory-Efficient Multi-Frame Optical
+              Flow</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://github.com/VladislavBargatin">Vladislav Bargatin</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="http://github.com/egorchistov">Egor Chistov</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://github.com/AlexanderYakovenko1">Alexander
+                  Yakovenko</a><sup>1,2</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://linkedin.com/in/dmitriyvatolin">Dmitriy Vatolin</a><sup>1,2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Lomonosov Moscow State University</span>
+              <span class="author-block"><sup>2</sup>MSU Institute for Artificial Intelligence</span>
+            </div>
+
+            <div class="column">
+              <h2 class="title is-4 publication-title">ICCV 2025 Highlight</h2>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2506.23151" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/msu-video-group/memfof" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/egorchistov/MEMFOF" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-play-circle"></i>
+                    </span>
+                    <span>Demo</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://colab.research.google.com/github/msu-video-group/memfof/blob/dev/demo.ipynb" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-file-code"></i>
+                    </span>
+                    <span>Colab</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="spring-videos">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Native-Resolution Results on Spring</h2>
+          <p>MEMFOF demonstrates that multi-frame processing <b>enhances temporal coherence</b>,
+            and native resolution input helps <b>retain details</b></p>
+        </div>
+      </div>
+      <img-comparison-slider>
+        <video slot="first" src="static/videos/spring_flow.mp4" muted loop autoplay></video>
+        <video slot="second" src="static/videos/spring_input.mp4" muted loop autoplay></video>
+      </img-comparison-slider>
+      <p>
+        Controls: <b>Click</b> or press <b>spacebar</b> to play/pause; <b>drag slider</b> to compare results; use
+        <b>←</b>/<b>→</b> <b>arrows</b> to step through frames.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="highlights">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Highlights</h2>
+          <div class="content has-text-justified">
+            <ul>
+              <li>MEMFOF delivers high-accuracy optical flow estimation for Full HD video while significantly reducing
+                GPU
+                memory usage — requiring <b>just 2.09 GB</b> — enabling <strong>native 1080p processing</strong> without
+                cropping or downsampling</li>
+              <li>By combining multi-frame estimation, scalable correlation volumes, and resolution-aware training, it
+                achieves <b>state-of-the-art results across multiple benchmarks</b> with lower resource demands</li>
+              <li>The method <b>ranks first on Spring and Sintel (Clean) benchmarks</b> and shows
+                strong performance on <b>KITTI-2015</b>, combining superior accuracy with efficiency
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="histograms">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">High-Resolution Data</h2>
+          <p>Using 2D histograms, we <b>analyze and compare motion patterns</b> across optical flow datasets to uncover
+            the full range and distribution of movements. We <b>identify gaps in existing data</b> and <b>enhance
+              training set through upsampling</b> to address them</p>
+        </div>
+      </div>
+      <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
+        <div class="item">
+          <image src="static/images/hists/tartan.png"></image>
+          <p class="has-text-weight-semibold mt-2">TartanAir</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/things.png"></image>
+          <p class="has-text-weight-semibold mt-2">FlyingThings</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/kitti.png"></image>
+          <p class="has-text-weight-semibold mt-2">KITTI-2015</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/hd1k.png"></image>
+          <p class="has-text-weight-semibold mt-2">HD1K</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/sintel.png"></image>
+          <p class="has-text-weight-semibold mt-2">Sintel</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/spring.png"></image>
+          <p class="has-text-weight-semibold mt-2">Spring</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/combined.png"></image>
+          <p class="has-text-weight-semibold mt-2">Combined</p>
+        </div>
+        <div class="item">
+          <image src="static/images/hists/combined2x.png"></image>
+          <p class="has-text-weight-semibold mt-2">Combined at 2x resolution</p>
+        </div>
+      </div>
+      <p>Color intensity indicates the number of motion vectors per bin, with borders marking each dataset’s maximum
+        motion range. Large motions in the Spring dataset, missing from other training sets, are captured after 2x
+        upsampling the combined data</p>
+    </div>
+  </section>
+
+  <section class="section" id="memory-efficiency">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Memory Efficiency</h2>
+          <p>By reducing the resolution of correlation volumes, we free up enough memory to implement a multi-frame
+            method that improves temporal stability. Our method requires <b>just 2.09 GB of memory for inference,</b>
+            enabling <b>native Full HD training</b></p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <object type="image/svg+xml" data="static/images/one-corr.svg"></object>
+          <p class="m-4 has-text-weight-semibold">SEA-RAFT</p>
+        </div>
+        <div class="item">
+          <object type="image/svg+xml" data="static/images/two-corrs.svg"></object>
+          <p class="m-4 has-text-weight-semibold">MEMFOF</p>
+        </div>
+      </div>
+
+      <p>
+        Reducing correlation volume resolution lowers memory use but can degrade quality. Our three-frame approach
+        compensates for this, restoring accuracy while keeping efficiency and enabling native Full HD processing
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="error-vs-memory">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">1px Error vs. Memory Usage on Spring</h2>
+          <p>MEMFOF demonstrates <b>superior memory efficiency</b> and the <b>lowest error</b> among all methods. Speed
+            and peak memory usage were measured on a Nvidia RTX 3090</p>
+        </div>
+      </div>
+      <div>
+        <canvas id="spring-chart"></canvas>
+      </div>
+      <p>Results are sourced from <a href="https://spring-benchmark.org/opticalflow">official leaderboard</a> of the
+        Spring benchmark on 29 Jun 2025.<br>w/o ft stands for methods that were not finetuned on Spring dataset</p>
+    </div>
+  </section>
+
+  <section class="section" id="sintel-videos">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Performance on Sintel Benchmark</h2>
+          <p>MEMFOF produces <b>consistent motion</b> across large deformations and occlusions in challenging cinematic scenes</p>
+        </div>
+      </div>
+      <img-comparison-slider>
+        <video slot="first" src="static/videos/sintel_flow.mp4" muted loop autoplay></video>
+        <video slot="second" src="static/videos/sintel_input.mp4" muted loop autoplay></video>
+      </img-comparison-slider>
+      <p>
+        Controls: <b>Click</b> or press <b>spacebar</b> to play/pause; <b>drag slider</b> to compare results; use
+        <b>←</b>/<b>→</b> <b>arrows</b> to step through frames.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="sintel-results">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">EndPoint Error on Sintel</h2>
+          <p>MEMFOF achieves <b>state-of-the-art performance</b> on both Sintel splits, outperforming five-frame version of VideoFlow by 3% <b>on the clean pass</b> and outperforming SEA-RAFT (L) by 32% on the final pass</p>
+        </div>
+      </div>
+      <div>
+        <canvas id="sintel-chart"></canvas>
+      </div>
+      <p>Results are sourced from <a href="http://sintel.is.tue.mpg.de/quant?metric_id=0&selected_pass=1">official leaderboard</a> of the Sintel benchmark on 29 Jun 2025.<br>Methods are sorted by performance on Sintel Clean split</p>
+    </div>
+  </section>
+
+  <section class="section" id="kitti-videos">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Performance in Real-World KITTI Scenes</h2>
+          <p>MEMFOF excels in real-world driving scenes, showing <b>high accuracy and stability</b> across challenging motions and lighting</b></p>
+        </div>
+      </div>
+      <img-comparison-slider>
+        <video slot="first" src="static/videos/kitti_flow.mp4" muted loop autoplay></video>
+        <video slot="second" src="static/videos/kitti_input.mp4" muted loop autoplay></video>
+      </img-comparison-slider>
+      <p>
+        Controls: <b>Click</b> or press <b>spacebar</b> to play/pause; <b>drag slider</b> to compare results; use
+        <b>←</b>/<b>→</b> <b>arrows</b> to step through frames.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="kitti-results">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Fl-all on KITTI-2015</h2>
+          <p>MEMFOF achieves <b>state-of-the-art performance</b> among all non-scene flow methods, outperforming both SEA-RAFT and VideoFlow</p>
+        </div>
+      </div>
+      <div>
+        <canvas id="kitti-chart"></canvas>
+      </div>
+      <p>Results are sourced from <a href="https://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=flow">official leaderboard</a> of the KITTI benchmark on 29 Jun 2025. <br>Only non-scene flow methods are shown</p>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{bargatin2025memfof,
+  title = {MEMFOF: High-Resolution Training for Memory-Efficient Multi-Frame Optical Flow Estimation},
+  author = {Bargatin, Vladislav and Chistov, Egor and Yakovenko, Alexander and Vatolin, Dmitriy},
+  journal = {arXiv preprint arXiv:2506.23151},
+  year = {2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="section" id="credit">
+    <div class="content has-text-centered">
+      <p>
+        The project page is based on <a href="https://github.com/nerfies/nerfies.github.io">this template</a>,
+        licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license
+      </p>
+    </div>
+  </section>
+</body>
+
+</html>
