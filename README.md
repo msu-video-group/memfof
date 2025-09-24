@@ -17,27 +17,37 @@
 
 **MEMFOF** is a **memory-efficient optical flow method** for **Full HD video** that combines **high accuracy** with **low VRAM usage**.
 
-## 🛠️ Installation
+## 🤗 Demo
 
-Our code is developed with pytorch >= 2.5.0, CUDA >= 12.6 and python >= 3.10.
-
-```shell
-git clone https://github.com/msu-video-group/memfof.git
-cd memfof
-pip3 install -r requirements.txt
-```
-
-## 🚀 Demo
-
-Given a video sequence, our code supports generating prediction results of optical flow. 
+Given a video sequence, our code can estimate its optical flow. Visit the [demo page](https://huggingface.co/spaces/egorchistov/MEMFOF) and try it with your own video.
 
 > 🏞️ Prefer MEMFOF-Tartan-T-TSKH model for real-world videos — it is trained with higher diversity and robustness in mind.
 
-Refer to [demo.ipynb](https://colab.research.google.com/github/msu-video-group/memfof/blob/dev/demo.ipynb) for examle usage or run the following command to host a [demo page](https://huggingface.co/spaces/egorchistov/MEMFOF).
+## 🚀 Using MEMFOF in Your Project
+
+Install MEMFOF via the package manager:
 
 ```shell
-python3 demo.py
+pip3 install git+https://github.com/msu-video-group/memfof
 ```
+
+Then use the following snippet to compute backward and forward optical flow for three consecutive frames:
+
+```python
+import torch
+from memfof import MEMFOF
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = MEMFOF.from_pretrained("egorchistov/optical-flow-MEMFOF-Tartan-T-TSKH").eval().to(device)
+
+with torch.inference_mode():
+    # [B=1, T=3, C=3, H=1080, W=1920]
+    example_input = torch.randint(0, 256, [1, 3, 3, 1080, 1920], device=device)
+    # [B=1, C=2, H=1080, W=1920]
+    backward_flow, forward_flow = model(example_input)["flow"][-1].unbind(dim=1)
+```
+
+Refer to the [demo notebook](https://colab.research.google.com/github/msu-video-group/memfof/blob/dev/demo.ipynb) for quick start.
 
 ## 📦 Models
 
@@ -47,6 +57,16 @@ python3 demo.py
 - [`MEMFOF-Tartan-T-TSKH-kitti`](https://huggingface.co/egorchistov/optical-flow-MEMFOF-Tartan-T-TSKH-kitti)
 - [`MEMFOF-Tartan-T-TSKH-sintel`](https://huggingface.co/egorchistov/optical-flow-MEMFOF-Tartan-T-TSKH-sintel)
 - [`MEMFOF-Tartan-T-TSKH-spring`](https://huggingface.co/egorchistov/optical-flow-MEMFOF-Tartan-T-TSKH-spring)
+
+## 🛠️ Dev Installation
+
+To train, evaluate, or submit MEMFOF, you’ll need the dev installation. Run the following commands:
+
+```shell
+git clone https://github.com/msu-video-group/memfof.git
+cd memfof
+pip3 install --editable .[dev]
+```
 
 ## 🗂️ Datasets
 

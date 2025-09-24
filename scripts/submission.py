@@ -3,15 +3,13 @@ import os
 import cv2
 
 import torch
-
-from config.parser import parse_args
-
-from core import datasets
-from core.memfof_lit import MEMFOFLit
 from tqdm import tqdm
 
-from core.utils.flow_viz import flow_to_image
-from core.utils import frame_utils
+from config.parser import parse_args
+from memfof import datasets
+from memfof.model_lit import MEMFOFLit
+from memfof.utils import frame_utils
+from memfof.utils.flow_viz import flow_to_image
 
 
 @torch.inference_mode()

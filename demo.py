@@ -9,18 +9,8 @@ import cv2
 import requests
 from tqdm import tqdm
 
-from core.utils.flow_viz import flow_to_image
-from core.memfof import MEMFOF
-
-
-AVAILABLE_MODELS = [
-    "MEMFOF-Tartan",
-    "MEMFOF-Tartan-T",
-    "MEMFOF-Tartan-T-TSKH",
-    "MEMFOF-Tartan-T-TSKH-kitti",
-    "MEMFOF-Tartan-T-TSKH-sintel",
-    "MEMFOF-Tartan-T-TSKH-spring",
-]
+from memfof.utils.flow_viz import flow_to_image
+from memfof.model import MEMFOF, AVAILABLE_MODELS
 
 
 class FFmpegWriter:

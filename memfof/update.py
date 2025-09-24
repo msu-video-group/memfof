@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from core.layer import ConvNextBlock
-from core.gma import Aggregate
+from memfof.layer import ConvNextBlock
+from memfof.gma import Aggregate
 
 
 class BasicMotionEncoder(nn.Module):

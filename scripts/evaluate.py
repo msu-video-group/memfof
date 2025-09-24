@@ -2,8 +2,8 @@ import argparse
 
 import pytorch_lightning as pl
 
-from core.memfof_lit import MEMFOFLit, DataModule
 from config.parser import parse_args
+from memfof.model_lit import MEMFOFLit, DataModule
 
 
 if __name__ == "__main__":

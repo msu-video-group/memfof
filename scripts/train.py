@@ -1,14 +1,14 @@
 import os
 import argparse
 
-import pytorch_lightning as pl
 import wandb
+import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from pytorch_lightning.plugins import TorchSyncBatchNorm
 
-from core.memfof_lit import MEMFOFLit, DataModule
 from config.parser import parse_args
+from memfof.model_lit import MEMFOFLit, DataModule
 
 
 def detect_cluster(args: argparse.Namespace) -> argparse.Namespace:

@@ -1,5 +1,6 @@
 # Data loading based on https://github.com/NVIDIA/flownet2-pytorch
 
+from memfof.utils.flow_utils import merge_flows
 import numpy as np
 import torch
 import torch.utils.data as data
@@ -9,9 +10,9 @@ import json
 import random
 from glob import glob
 import os.path as osp
-from core.utils import frame_utils
-from core.utils.augmentor import FlowAugmentor, SparseFlowAugmentor
-from core.utils.utils import merge_flows, fill_invalid
+from memfof.utils import frame_utils
+from memfof.utils.augmentor import FlowAugmentor, SparseFlowAugmentor
+from memfof.utils.flow_utils import fill_invalid
 
 from functools import reduce
 from queue import Queue

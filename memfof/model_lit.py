@@ -6,11 +6,11 @@ import pytorch_lightning as pl
 from torch.utils import data
 import torch.nn.functional as F
 
-from core import datasets
-from core.memfof import MEMFOF
-from core.datasets import fetch_dataloader
-from core.utils.utils import load_ckpt
-from core.loss import sequence_loss
+from memfof import datasets
+from memfof.model import MEMFOF
+from memfof.datasets import fetch_dataloader
+from memfof.utils.utils import load_ckpt
+from memfof.loss import sequence_loss
 
 
 class MEMFOFLit(pl.LightningModule):

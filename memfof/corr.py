@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from core.utils.utils import bilinear_sampler
+from memfof.utils.utils import bilinear_sampler
 
 
 def coords_feature(fmap, b, x, y):

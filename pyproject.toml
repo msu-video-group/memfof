@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=80.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["memfof*"]
+
+[project]
+name = "memfof"
+version = "1.0.3"
+maintainers = [
+  { name = "Egor Chistov", email = "egorchistov@mail.ru" }
+]
+description = "MEMFOF is a memory-efficient optical flow method for Full HD video that combines high accuracy with low VRAM usage"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.5",
+  "torchvision>=0.20",
+  "einops>=0.8",
+  "huggingface-hub>=0.35",
+  "safetensors>=0.6",
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+
+[project.optional-dependencies]
+dev = [
+  "lightning>=2.5",
+  "opencv-python-headless>=4.12",
+  "h5py>=3.14",
+  "scipy>=1.16",
+  "wandb>=0.22",
+  "ipykernel>=6.30",
+  "gradio>=5.46",
+  "spaces>=0.41",
+]
+
+[project.urls]
+Homepage = "https://github.com/msu-video-group/memfof"
+Issues = "https://github.com/msu-video-group/memfof/issues"
