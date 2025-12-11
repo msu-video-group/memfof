@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">MEMFOF: High-Resolution Training for Memory-Efficient Multi-Frame Optical Flow Estimation</h1>
   <p align="center">
-    <a href="https://github.com/VladBargin">Vladislav Bargatin</a>
+    <a href="https://github.com/VladislavBargatin">Vladislav Bargatin</a>
     ·
     <a href="http://github.com/egorchistov">Egor Chistov</a>
     ·
